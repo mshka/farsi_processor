@@ -14,7 +14,6 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/mshka/farsi_normalizer"
   spec.license       = "MIT"
 
-
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }

@@ -19,8 +19,14 @@ class FarsiNormalizer
 
   def initialize(word, options = {})
     @word = word.dup
-    @onlys = options[:only].presence || []
-    @excepts = options[:except].presence || []
+
+    @onlys = []
+    @excepts = []
+    if options[:only]
+      @onlys = options[:only]
+    elsif options[:except]
+      @excepts = options[:except]
+    end
   end
 
   def normalize
@@ -32,13 +38,15 @@ class FarsiNormalizer
     def rules(rule_set)
       if excepts.any?
         rule_set.reject { |k, v| excepts.include?(k) }
-      elsif
+      elsif onlys.any?
         rule_set.select { |k, v| onlys.include?(k) }
+      else
+        rule_set
       end
     end
 
     def normalize_charachters
-      rules(CHARACTERS_AT_BEGINING_OF_WORD_MAPPINGSA).each do |match, replacement|
+      rules(CHARACTERS_MAPPINGS).each do |match, replacement|
         word.gsub!(match, replacement)
       end
     end
