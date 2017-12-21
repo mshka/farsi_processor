@@ -5,13 +5,24 @@ describe FarsiNormalizer do
     expect(FarsiNormalizer::VERSION).not_to be nil
   end
 
-  it "normalize letters from beginning of word" do
+  it "normalize arabic letters to farsi" do
     data = {
-      "کتلت" => "كتلت"
+      "كتلت" => "کتلت",
+      "بسکويت" => "بسکویت",
+      "بسکوىت" => "بسکویت",
+      "كىساديا" => "کیسادیا"
     }
 
     data.each do |before, after|
       expect(FarsiNormalizer.normalize(before)).to eq(after)
     end
+  end
+
+  it "has an only character option" do
+    expect(FarsiNormalizer.normalize("بسكويت", only: ["ك"])).to eq("بسکويت")
+  end
+
+  it "has an expect character option" do
+    expect(FarsiNormalizer.normalize("بسكويت", except: ["ك"])).to eq("بسكویت")
   end
 end
