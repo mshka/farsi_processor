@@ -1,20 +1,16 @@
 require "farsi_normalizer/version"
 
 class FarsiNormalizer
-  ARABIC_KAF = "\UFED9" #ﻙ
-  FARSI_KEHEH = "\U06A9" #ک
-  YAY = "\UFEF1" #ﻱ
-  ALEF_MAKSOURA = "\UFEEF" #ﻯ
-  ALEF = "\UFE8D" #ﺍ
-  ALEF_MADDA = "\UFE81" #ﺁ
+  ARABIC_KAF = "\u0643" #ك
+  FARSI_KEHEH = "\u06a9" #ک
+  ARABIC_YEH = "\u064a" #ي
+  ARABIC_ALEF_MAKSOURA = "\u0649" #ى
+  FARSI_YEH = "\u06cc" #ی
 
   CHARACTERS_MAPPINGS = {
-    ARABIC_KAF => FARSI_KAF,
-    YAY => ALEF_MAKSOURA
-  }
-
-  CHARACTERS_AT_BEGINING_OF_WORD_MAPPINGS = {
-    ALEF => ALEF_MADDA
+    ARABIC_KAF => FARSI_KEHEH,
+    ARABIC_YEH => FARSI_YEH,
+    ARABIC_ALEF_MAKSOURA => FARSI_YEH,
   }
 
   def self.normalize(word, options = {})
@@ -25,36 +21,34 @@ class FarsiNormalizer
 
   def initialize(word, options = {})
     @word = word.dup
-    @onlys = options[:only].presence || []
-    @excepts = options[:except].presence || []
+
+    @onlys = []
+    @excepts = []
+    if options[:only]
+      @onlys = options[:only]
+    elsif options[:except]
+      @excepts = options[:except]
+    end
   end
 
   def normalize
-    normalize_charachter_at_begining_of_word
     normalize_charachters
+    word
   end
 
   private
 
-    def rules(rule_set)
+    def rules
       if excepts.any?
-        rule_set.reject { |k, v| excepts.include?(k) }
-      elsif
-        rule_set.select { |k, v| onlys.include?(k) }
-      end
-    end
-
-    def normalize_charachter_at_begining_of_word
-      rules(CHARACTERS_AT_BEGINING_OF_WORD_MAPPINGSA).each do |match, replacement|
-        if word.start_with?(match)
-          word.sub!(match, replacement)
-        end
+        CHARACTERS_MAPPINGS.reject { |k, v| excepts.include?(k) }
+      elsif onlys.any?
+        CHARACTERS_MAPPINGS.select { |k, v| onlys.include?(k) }
+      else
+        CHARACTERS_MAPPINGS
       end
     end
 
     def normalize_charachters
-      rules(CHARACTERS_AT_BEGINING_OF_WORD_MAPPINGSA).each do |match, replacement|
-        word.gsub!(match, replacement)
-      end
+      word.gsub!(/[#{rules.keys.join}]/, CHARACTERS_MAPPINGS)
     end
 end
