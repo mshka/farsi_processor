@@ -1,15 +1,19 @@
-# FarsiNormalizer
+# Farsi_Normalizer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/farsi_normalizer`. To experiment with that code, run `bin/console` for an interactive prompt.
+FarsiNormalizer is a replacement for the Lucene [persian_normalizer](http://lucene.apache.org/core/4_9_0/analyzers-common/org/apache/lucene/analysis/fa/PersianNormalizer.html) written in ruby to use with elasticsearch or as a stand alone class
 
-TODO: Delete this and the text above, and describe your gem
+Instead of normalizing farsi\persian characters to arabic this gem normalize the arabic characters to farsi\persian
+
+Normalization is defined as:
+ - Normalization of arabic keh to farsi keheh
+ - Normalization of arabic yeh and arabic alef maksoura to farsi yeh
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'farsi_normalizer'
+gem "farsi_normalizer"
 ```
 
 And then execute:
@@ -22,7 +26,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'farsi_normalizer'
+
+
+[1] pry(main)> FarsiNormalizer.normalize("بسکويت")
+=> "بسکويت"
+
+[2] pry(main)> FarsiNormalizer.new("بسکويت").normalize
+=> "بسکويت"
+
+[3] pry(main)> FarsiNormalizer.normalize("بسكويت", only: ["ك"])
+=> "بسکويت"
+
+[4] pry(main)> FarsiNormalizer.normalize("بسكويت", except: ["ك"])
+=> "بسكویت"
+```
 
 ## Development
 
@@ -32,10 +51,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/farsi_normalizer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mshka/farsi_normalizer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
