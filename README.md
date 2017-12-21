@@ -5,8 +5,8 @@ FarsiNormalizer is a replacement for the Lucene [persian_normalizer](http://luce
 Instead of normalizing farsi\persian characters to arabic this gem normalize the arabic characters to farsi\persian
 
 Normalization is defined as:
- - Normalization of arabic keh to farsi keheh
- - Normalization of arabic yeh and arabic alef maksoura to farsi yeh
+ - Normalization of [arabic kaf](https://unicode-table.com/en/0643/) to [farsi keheh](https://unicode-table.com/en/06A9/)
+ - Normalization of [arabic yeh](https://unicode-table.com/en/064A/) and [arabic alef maksoura](https://unicode-table.com/en/0649/) to [farsi yeh](https://unicode-table.com/en/06CC/)
 
 ## Installation
 
@@ -30,29 +30,25 @@ Or install it yourself as:
 require 'farsi_normalizer'
 
 
-[1] pry(main)> FarsiNormalizer.normalize("بسکويت")
-=> "بسکويت"
+[1] pry(main)> FarsiNormalizer.normalize("ك")
+=> "ک"
 
-[2] pry(main)> FarsiNormalizer.new("بسکويت").normalize
-=> "بسکويت"
+[2] pry(main)> FarsiNormalizer.new("ي").normalize
+=> "ی"
 
-[3] pry(main)> FarsiNormalizer.normalize("بسكويت", only: ["ك"])
-=> "بسکويت"
+[3] pry(main)> FarsiNormalizer.normalize("ك ي", only: ["ك"])
+=> "ک ي"
 
-[4] pry(main)> FarsiNormalizer.normalize("بسكويت", except: ["ك"])
-=> "بسكویت"
+[4] pry(main)> FarsiNormalizer.normalize("ك ي", only: ["ك"])
+=> "ك ی"
+
+[5] pry(main)> FarsiNormalizer.normalize("بسکوىت")
+=> "بسکویت"
 ```
 
-## Development
+### Questions or Problems?
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/mshka/farsi_normalizer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
+If you have any issues with farsi_normalizer which you cannot find the solution, please add an [issue on GitHub][https://github.com/mshka/farsi_normalizer/issues] or fork the project and send a pull request.
 
 ## License
 
