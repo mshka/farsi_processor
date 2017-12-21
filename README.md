@@ -45,7 +45,7 @@ require 'farsi_normalizer'
 
 ### Questions or Problems?
 
-If you have any issues with CanCan which you cannot find the solution, please add an {issue on GitHub}[https://github.com/mshka/farsi_normalizer/issues] or fork the project and send a pull request.
+If you have any issues with farsi_normalizer which you cannot find the solution, please add an {issue on GitHub}[https://github.com/mshka/farsi_normalizer/issues] or fork the project and send a pull request.
 
 ## License
 
