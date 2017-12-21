@@ -41,6 +41,9 @@ require 'farsi_normalizer'
 
 [4] pry(main)> FarsiNormalizer.normalize("ك ي", only: ["ك"])
 => "ك ی"
+
+[5] pry(main)> FarsiNormalizer.normalize("بسکویت")
+=> "بسکویت"
 ```
 
 ### Questions or Problems?
