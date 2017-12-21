@@ -5,16 +5,10 @@ class FarsiNormalizer
   FARSI_KEHEH = "\U06A9" #ک
   YAY = "\UFEF1" #ﻱ
   ALEF_MAKSOURA = "\UFEEF" #ﻯ
-  ALEF = "\UFE8D" #ﺍ
-  ALEF_MADDA = "\UFE81" #ﺁ
 
   CHARACTERS_MAPPINGS = {
-    ARABIC_KAF => FARSI_KAF,
+    ARABIC_KAF => FARSI_KEHEH,
     YAY => ALEF_MAKSOURA
-  }
-
-  CHARACTERS_AT_BEGINING_OF_WORD_MAPPINGS = {
-    ALEF => ALEF_MADDA
   }
 
   def self.normalize(word, options = {})
@@ -30,7 +24,6 @@ class FarsiNormalizer
   end
 
   def normalize
-    normalize_charachter_at_begining_of_word
     normalize_charachters
   end
 
@@ -41,14 +34,6 @@ class FarsiNormalizer
         rule_set.reject { |k, v| excepts.include?(k) }
       elsif
         rule_set.select { |k, v| onlys.include?(k) }
-      end
-    end
-
-    def normalize_charachter_at_begining_of_word
-      rules(CHARACTERS_AT_BEGINING_OF_WORD_MAPPINGSA).each do |match, replacement|
-        if word.start_with?(match)
-          word.sub!(match, replacement)
-        end
       end
     end
 
