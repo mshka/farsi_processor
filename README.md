@@ -1,4 +1,4 @@
-# Farsi_Normalizer
+# Farsi Normalizer
 
 FarsiNormalizer is a replacement for the Lucene [persian_normalizer](http://lucene.apache.org/core/4_9_0/analyzers-common/org/apache/lucene/analysis/fa/PersianNormalizer.html) written in ruby to use with elasticsearch or as a stand alone class
 
