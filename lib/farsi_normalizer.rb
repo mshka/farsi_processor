@@ -3,15 +3,47 @@ require "farsi_normalizer/version"
 class FarsiNormalizer
   ARABIC_KAF = "\u0643" #ك
   FARSI_KEHEH = "\u06a9" #ک
+
   ARABIC_YEH = "\u064a" #ي
   ARABIC_ALEF_MAKSOURA = "\u0649" #ى
   FARSI_YEH = "\u06cc" #ی
+
+  ALEF_MADDA = "\u0622" #آ
+  ALEF_WITH_HAMZA_BELOW = "\u0625" #إ
+  ALEF_WITH_HAMZA_ABOVE = "\u0623" #أ
+  ALEF = "\u0627" #ا
+
+  TATWIL = "\u0640" #ـ
+
+  FATHATAN = "\u064b"
+  DAMMATAN = "\u064c"
+  KASRATAN = "\u064d"
+  FATHA = "\u064e"
+  DAMMA = "\u064f"
+  KASRA = "\u0650"
+  SHADDA = "\u0651"
+  SUKUN = "\u0652"
 
   CHARACTERS_MAPPINGS = {
     ARABIC_KAF => FARSI_KEHEH,
     ARABIC_YEH => FARSI_YEH,
     ARABIC_ALEF_MAKSOURA => FARSI_YEH,
+    ALEF_MADDA => ALEF,
+    ALEF_WITH_HAMZA_BELOW => ALEF,
+    ALEF_WITH_HAMZA_ABOVE => ALEF,
+    TATWIL => ""
   }
+
+  DIACRITICS = [
+    FATHATAN,
+    DAMMATAN,
+    KASRATAN,
+    FATHA,
+    DAMMA,
+    KASRA,
+    SHADDA,
+    SUKUN
+  ]
 
   def self.normalize(word, options = {})
     new(word, options).normalize
@@ -32,23 +64,34 @@ class FarsiNormalizer
   end
 
   def normalize
-    normalize_charachters
+    map_charachters
+    remove_diacritics
     word
   end
 
   private
 
-    def rules
+    def filter_rules(group)
       if excepts.any?
-        CHARACTERS_MAPPINGS.reject { |k, v| excepts.include?(k) }
+        group.reject { |k, v| excepts.include?(k) }
       elsif onlys.any?
-        CHARACTERS_MAPPINGS.select { |k, v| onlys.include?(k) }
+        group.select { |k, v| onlys.include?(k) }
       else
-        CHARACTERS_MAPPINGS
+        group
       end
     end
 
-    def normalize_charachters
-      word.gsub!(/[#{rules.keys.join}]/, CHARACTERS_MAPPINGS)
+    def map_charachters
+      rules = filter_rules(CHARACTERS_MAPPINGS)
+      return if rules.empty?
+
+      word.gsub!(/[#{rules.keys.join}]/, rules)
+    end
+
+    def remove_diacritics
+      rules = filter_rules(DIACRITICS)
+      return if rules.empty?
+
+      word.gsub!(/[#{rules.join}]/, "")
     end
 end
