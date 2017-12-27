@@ -1,6 +1,4 @@
-# Farsi Normalizer 
-## CI   <img style="float: left;" src="https://circleci.com/gh/mshka/farsi_processor.svg?style=svg">
-
+# Farsi Normalizer <img style="float: left;" src="https://circleci.com/gh/mshka/farsi_processor.svg?style=svg">
 
 FarsiProcessor is a ruby gem to normalize and stem Persian/Farsi text
 
