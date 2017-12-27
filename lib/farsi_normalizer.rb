@@ -1,4 +1,4 @@
-require 'farsi_normalizer/version'
+require 'farsi_processor/version'
 
 class FarsiNormalizer
   ARABIC_KAF = "\u0643".freeze # ك

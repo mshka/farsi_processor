@@ -1,4 +1,4 @@
-require 'farsi_normalizer/version'
+require 'farsi_processor/version'
 
 class FarsiStemmer
   ALEF = "\u0627".freeze # ا

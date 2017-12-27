@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "farsi_processor"
 require "farsi_normalizer"
 require "farsi_stemmer"
 

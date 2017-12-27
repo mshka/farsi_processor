@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'farsi_normalizer/version'
+require 'farsi_processor/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "farsi_normalizer"
-  spec.version       = FarsiNormalizer::VERSION
+  spec.name          = "farsi_processor"
+  spec.version       = FarsiProcessor::VERSION
   spec.authors       = ["mark jad"]
   spec.email         = ["mark.jad@live.com"]
 
-  spec.summary       = %q{farsi_normalizer is a Ruby port of farsi/persian Noramlizer to replace the one from Lucene}
-  spec.description   = %q{farsi_normalizer is a Ruby port of farsi/persian Noramlizer to replace the one from Lucene}
-  spec.homepage      = "https://github.com/mshka/farsi_normalizer"
+  spec.summary       = %q{farsi_processor is a Ruby port of farsi/persian Noramlizer to replace the one from Lucene}
+  spec.description   = %q{farsi_processor is a Ruby port of farsi/persian Noramlizer to replace the one from Lucene}
+  spec.homepage      = "https://github.com/mshka/farsi_processor"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
