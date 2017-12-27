@@ -1,4 +1,6 @@
-# Farsi Normalizer
+# Farsi Normalizer 
+## CI   <img style="float: left;" src="https://circleci.com/gh/mshka/farsi_processor.svg?style=svg">
+
 
 FarsiProcessor is a ruby gem to normalize and stem Persian/Farsi text
 
@@ -10,6 +12,7 @@ Normalization is defined as:
  - Removing [DIACRITICS](https://github.com/mshka/farsi_processor/blob/master/lib/farsi_normalizer.rb#L18-L25)
 
 Stemming is defined as removing these [suffixes (+ suffixes of plural form)](https://github.com/mshka/farsi_processor/blob/master/lib/farsi_stemmer.rb#L19-L28)
+
 
 ## Installation
 
