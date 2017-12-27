@@ -15,15 +15,15 @@ describe FarsiNormalizer do
     }
 
     data.each do |before, after|
-      expect(FarsiNormalizer.normalize(before)).to eq(after)
+      expect(FarsiNormalizer.process(before)).to eq(after)
     end
   end
 
   it 'has an only character option' do
-    expect(FarsiNormalizer.normalize('بسكويت', only: ['ك'])).to eq('بسکويت')
+    expect(FarsiNormalizer.process('بسكويت', only: ['ك'])).to eq('بسکويت')
   end
 
   it 'has an expect character option' do
-    expect(FarsiNormalizer.normalize('بسكويت', except: ['ك'])).to eq('بسكویت')
+    expect(FarsiNormalizer.process('بسكويت', except: ['ك'])).to eq('بسكویت')
   end
 end

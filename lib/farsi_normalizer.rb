@@ -45,8 +45,8 @@ class FarsiNormalizer
     SUKUN
   ].freeze
 
-  def self.normalize(word, options = {})
-    new(word, options).normalize
+  def self.process(word, options = {})
+    new(word, options).process
   end
 
   attr_reader :word, :excepts, :onlys
@@ -63,7 +63,7 @@ class FarsiNormalizer
     end
   end
 
-  def normalize
+  def process
     map_charachters
     remove_diacritics
     word

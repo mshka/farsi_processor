@@ -28,7 +28,7 @@ class FarsiProcessor
   end
 
   def normalize
-    @word = FarsiNormalizer.normalize(word, options)
+    @word = FarsiNormalizer.process(word, options)
   end
 
   def stem
