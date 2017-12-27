@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["mark jad"]
   spec.email         = ["mark.jad@live.com"]
 
-  spec.summary       = %q{farsi_processor is a Ruby port of farsi/persian Noramlizer to replace the one from Lucene}
-  spec.description   = %q{farsi_processor is a Ruby port of farsi/persian Noramlizer to replace the one from Lucene}
+  spec.summary       = %q{farsi_processor is a Ruby gem to process (stem and normalize) persian/farsi text}
+  spec.description   = %q{farsi_processor is a Ruby gem to process (stem and normalize) persian/farsi text}
   spec.homepage      = "https://github.com/mshka/farsi_processor"
   spec.license       = "MIT"
 
