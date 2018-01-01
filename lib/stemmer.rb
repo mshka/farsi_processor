@@ -1,6 +1,6 @@
 require 'farsi_processor/version'
 
-class FarsiStemmer
+module Stemmer
   ALEF = "\u0627".freeze # ا
   YEH = "\u06cc".freeze # ی
   HEH = "\u0647".freeze # ه
@@ -27,27 +27,9 @@ class FarsiStemmer
     ALEF + YEH
   ] + PLURAL_FORMS
 
-  def self.process(word, options = {})
-    new(word, options).process
-  end
-
-  attr_reader :word, :excepts, :onlys
-
-  def initialize(word, options = {})
-    @word = word.dup
-
-    @onlys = []
-    @excepts = []
-    if options[:only]
-      @onlys = options[:only]
-    elsif options[:except]
-      @excepts = options[:except]
-    end
-  end
-
-  def process
+  def stem
     stem_suffix
-    word.strip
+    @word = word.strip
   end
 
   private
