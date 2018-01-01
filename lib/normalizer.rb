@@ -1,5 +1,3 @@
-require 'farsi_processor/version'
-
  module Normalizer
   ARABIC_KAF = "\u0643".freeze # ك
   FARSI_KEHEH = "\u06a9".freeze # ک
@@ -52,16 +50,6 @@ require 'farsi_processor/version'
   end
 
   private
-
-  def filter_rules(group)
-    if excepts.any?
-      group.reject { |k, _v| excepts.include?(k) }
-    elsif onlys.any?
-      group.select { |k, _v| onlys.include?(k) }
-    else
-      group
-    end
-  end
 
   def map_charachters
     rules = filter_rules(CHARACTERS_MAPPINGS)
