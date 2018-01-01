@@ -1,6 +1,4 @@
-require 'farsi_processor/version'
-
-class FarsiNormalizer
+module Normalizer
   ARABIC_KAF = "\u0643".freeze # ك
   FARSI_KEHEH = "\u06a9".freeze # ک
 
@@ -45,25 +43,7 @@ class FarsiNormalizer
     SUKUN
   ].freeze
 
-  def self.process(word, options = {})
-    new(word, options).process
-  end
-
-  attr_reader :word, :excepts, :onlys
-
-  def initialize(word, options = {})
-    @word = word.dup
-
-    @onlys = []
-    @excepts = []
-    if options[:only]
-      @onlys = options[:only]
-    elsif options[:except]
-      @excepts = options[:except]
-    end
-  end
-
-  def process
+  def normalize
     map_charachters
     remove_diacritics
     word
@@ -71,27 +51,17 @@ class FarsiNormalizer
 
   private
 
-  def filter_rules(group)
-    if excepts.any?
-      group.reject { |k, _v| excepts.include?(k) }
-    elsif onlys.any?
-      group.select { |k, _v| onlys.include?(k) }
-    else
-      group
-    end
-  end
-
   def map_charachters
     rules = filter_rules(CHARACTERS_MAPPINGS)
     return if rules.empty?
 
-    word.gsub!(/[#{rules.keys.join}]/, rules)
+    @word = word.gsub(/[#{rules.keys.join}]/, rules)
   end
 
   def remove_diacritics
     rules = filter_rules(DIACRITICS)
     return if rules.empty?
 
-    word.gsub!(/[#{rules.join}]/, '')
+    @word = word.gsub(/[#{rules.join}]/, '')
   end
 end
