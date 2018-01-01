@@ -1,4 +1,4 @@
- module Normalizer
+module Normalizer
   ARABIC_KAF = "\u0643".freeze # ك
   FARSI_KEHEH = "\u06a9".freeze # ک
 
